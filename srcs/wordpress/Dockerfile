@@ -1,8 +1,8 @@
 FROM alpine:latest
-
+RUN echo "WORDPRESS"
 RUN apk update && apk upgrade
 RUN apk add wget
-RUN apk add php7.4 php7.4-fpm php7.4-cli php7.4-mysql php7.4-mbstring php7.4-session php7.4-json
+RUN apk add php7 php7-fpm php7-cli php7-mbstring php7-session php7-json
 
 RUN wget https://wordpress.org/latest.tar.gz
 RUN tar -xvf latest.tar.gz

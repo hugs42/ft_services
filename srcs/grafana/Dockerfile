@@ -1,5 +1,5 @@
 FROM alpine:latest
-
-RUN apk update && apk upgrade -y
+RUN echo "GRAFANA"
+RUN apk update && apk upgrade
 RUN apk add --no-cache wget
 
