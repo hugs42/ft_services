@@ -8,3 +8,4 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -nodes -out /etc/nginx/ssl/nginx.
 
 COPY ./srcs/default.conf /etc/nginx/sites-available/default
 
+EXPOSE 80 443
