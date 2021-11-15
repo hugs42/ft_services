@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps
+  label: ftps
+spec:
+  selector:
+    matchLabels:
+    app: ftps
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: ftps
+        image: ftps
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 21
+           name: ftps
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftps
+  label: ftps
+spec:
+  type: LoadBalancer
+  selector:
+    app: ftps
+  ports:
+  - port: 21
+    name: ftps
+    protocol: TCP
