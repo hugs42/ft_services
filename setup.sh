@@ -22,10 +22,10 @@ minikube addons enable metallb
 
 sleep 5
 
-docker build -t nginx ./srcs/nginx/
-docker build -t mysql ./srcs/mysql/
-docker build -t phpmyadmin ./srcs/phpmyadmin/
-#docker build -t wordpress ./srcs/wordpress/ > /dev/null
+docker build -t nginx ./srcs/nginx/ > /dev/null
+docker build -t mysql ./srcs/mysql/ > /dev/null
+docker build -t phpmyadmin ./srcs/phpmyadmin/ > /dev/null
+docker build -t wordpress ./srcs/wordpress/ > /dev/null
 #docker build -t ftps ./srcs/ftps/
 #docker build -t grafana ./srcs/ftps/
 
@@ -36,7 +36,10 @@ kubectl apply -f ./srcs/yalm/metallb_configmap.yalm
 kubectl apply -f ./srcs/yalm/nginx.yalm
 kubectl apply -f ./srcs/yalm/mysql.yalm
 kubectl apply -f ./srcs/yalm/phpmyadmin.yalm
+kubectl apply -f ./srcs/yalm/wordpress.yalm
+
 #kubectl apply -f ./srcs/yalm/ftps.yalm
-#kubectl apply -f ./srcs/yalm/wordpress.yalm
 #kubectl apply -f ./srcs/yalm/grafana.yalm
+#kubectl apply -f ./srcs/yalm/influxdb.yalm
+
 #minikube dashboard
