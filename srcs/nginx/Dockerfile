@@ -1,6 +1,7 @@
 FROM alpine:latest
-RUN echo "NGINX"
-RUN apk update && apk upgrade
+RUN echo ">>NGINX"
+RUN apk update
+RUN apk upgrade
 RUN apk add --no-cache nginx
 RUN apk add --no-cache openssl
 RUN mkdir /etc/nginx/ssl
