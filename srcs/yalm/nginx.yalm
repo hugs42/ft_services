@@ -7,7 +7,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-    app: nginx
+      app: nginx
   replicas: 1
   template:
     metadata:
@@ -15,14 +15,16 @@ spec:
         app: nginx
     spec:
       containers:
-        - image: nginx
+        - name: nginx
+          image: nginx
           imagePullPolicy: Never
           ports:
-        - containerPort: 80
-          name: http-80
-        - containerPort: 443
-          name: https-443
+          - containerPort: 80
+            name: http-80
+          - containerPort: 443
+            name: https-443
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -35,8 +37,8 @@ spec:
     app: nginx
   ports:
   - port: 80
-    name: http
+    name: http-80
     protocol: TCP
   - port: 443
-    name: TCP
-    protocol: https
+    name: https-443
+    protocol: TCP
