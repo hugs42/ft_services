@@ -2,32 +2,32 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: phpmyadmin
-  name: phpmyadmin
+    app: mysql
+  name: mysql
 spec:
   selector:
     matchLabels:
-      app: phpmyadmin
+      app: mysql
   replicas: 1
   template:
     metadata:
       labels:
-        app: phpmyadmin
+        app: mysql
     spec:
       containers:
-        - name: phpmyadmin
-          image: phpmyadmin
+        - name: mysql
+          image: mysql
           imagePullPolicy: Never
           ports:
-          - containerPort: 5000
-            name: phpmyadmin-5000
+          - containerPort: 3306
+            name: mysql-3306
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: phpmyadmin
+  name: mysql
   annotations:
     metallb.universe.tf/address-pool: default
 spec:
@@ -36,7 +36,7 @@ spec:
   selector:
     app: phpmyadmin
   ports:
-  - port: 5000
-    name: phpmyadmin-5000
+  - port: 3306
+    name: mysql-3306
     protocol: TCP
 
