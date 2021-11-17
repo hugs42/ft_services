@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN echo ">>PHPMYADMIN"
+RUN echo ">>PHPMYADMIN<<"
 
 RUN apk update
 RUN apk upgrade
