@@ -1,8 +1,7 @@
 FROM alpine:latest
 RUN echo "INFLUXDB"
 RUN apk update && apk upgrade
-RUN apk add influxdb
-RUN apk add ca-certificate
+RUN apk add --no-cache influxdb
 
 EXPOSE 8086
 

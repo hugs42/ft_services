@@ -29,10 +29,10 @@ kind: Service
 metadata:
   name: phpmyadmin
   annotations:
-    metallb.universe.tf/address-pool: default
+    metallb.universe.tf/allow-shared-ip: shared
 spec:
   type: LoadBalancer
-  loadBalancerIP: 192.168.0.2
+  loadBalancerIP: 192.168.0.42
   selector:
     app: phpmyadmin
   ports:
