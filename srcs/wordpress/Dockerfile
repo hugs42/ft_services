@@ -14,6 +14,6 @@ RUN rm -f latest.tar.gz
 COPY ./srcs/wp-config.php /var/www/html/wordpress
 
 EXPOSE 5050
-COPY start.sh
+COPY ./srcs/run.sh
 RUN chmod +x start.sh
-CMD ./start.sh
+CMD sh run.sh
