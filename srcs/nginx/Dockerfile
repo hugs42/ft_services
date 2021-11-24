@@ -1,5 +1,6 @@
 FROM alpine:latest
-RUN echo ">>NGINX"
+
+RUN echo "\033[96m>> NGINX <<\033[0m"
 
 RUN apk update
 RUN apk upgrade
@@ -12,4 +13,8 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -nodes -out /etc/nginx/ssl/nginx.
 
 COPY ./srcs/default.conf /etc/nginx/sites-available/default
 
+COPY ./srcs/run.sh ./
+
 EXPOSE 80 443
+
+CMD sh run.sh
