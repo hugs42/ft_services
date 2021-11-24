@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN echo "\033[96m>> MYSQL <<\033[0m"
+RUN echo ">> MYSQL <<"
 
 RUN apk update && apk upgrade
 RUN apk add --no-cache mariadb
