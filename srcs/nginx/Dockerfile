@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN echo \033[96m>> NGINX <<\033[0m
+RUN echo ">> NGINX <<"
 
 RUN apk update
 RUN apk upgrade

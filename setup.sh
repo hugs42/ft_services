@@ -29,6 +29,7 @@ docker build -t phpmyadmin ./srcs/phpmyadmin/ #> /dev/null
 docker build -t wordpress ./srcs/wordpress/ #> /dev/null
 docker build -t ftps ./srcs/ftps/
 #docker build -t grafana ./srcs/grafana/
+#docker build -t influxdb ./srcs/influxdb/
 
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/metallb.yaml
