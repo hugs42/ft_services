@@ -3,6 +3,8 @@ RUN echo ">>WORDPRESS<<"
 
 RUN apk update && apk upgrade
 RUN apk add wget
+RUN apk add nginx
+RUN apk add mariadb mariadb-client
 RUN apk add php7 php7-fpm php7-cli php7-mbstring php7-session php7-json
 
 RUN wget https://wordpress.org/latest.tar.gz
@@ -12,6 +14,7 @@ RUN mv wordpress /var/www/html
 RUN rm -f latest.tar.gz
 
 COPY ./srcs/wp-config.php /var/www/html/wordpress
+COPY ./srcs/default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 5050
 COPY ./srcs/run.sh

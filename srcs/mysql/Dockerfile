@@ -12,5 +12,4 @@ COPY ./srcs/run.sh ./
 EXPOSE 3306
 
 CMD /etc/init.d/mariadb setup
-CMD service mariadb start
 CMD sh run.sh

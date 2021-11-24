@@ -1,4 +1,5 @@
 service mysql start
+service mariadb start
 echo "CREATE DATABASE IF NOT EXISTS wordpress;" | mysql -u root --skip-password
 echo "GRANT ALL ON wordpress.* TO 'root'@'localhost';" | mysql -u root --skip-password
 echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password
