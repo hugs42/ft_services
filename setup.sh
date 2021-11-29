@@ -14,7 +14,7 @@ echo "Starting minikube's configuration"
 minikube stop
 minikube delete
 minikube start --driver=docker --cpus=2
-#--kubernetes-version v1.24.0
+
 eval $(minikube docker-env)
 
 minikube addons enable metrics-server
@@ -22,6 +22,19 @@ minikube addons enable dashboard
 minikube addons enable metallb
 
 sleep 5
+
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e "s/strictARP: false/strictARP: true/" | \
+kubectl apply -f - -n kube-system
+
+export EXTERNAL_IP=`minikube ip`
+
+envsubst '$EXTERNAL_IP' <  srcs/yaml/metallb_configmap.yaml
+
+envsubst '$EXTERNAL_IP' < ./srcs/yaml/mysql.yaml
+envsubst '$EXTERNAL_IP' < ./srcs/yaml/wordpress.yaml
+envsubst '$EXTERNAL_IP' < ./srcs/yaml/phpmyadmin.yaml
+envsubst '$EXTERNAL_IP' < ./srcs/yaml/nginx.yaml
 
 docker build -t nginx ./srcs/nginx/ #> /dev/null
 docker build -t mysql ./srcs/mysql/ #> /dev/null
