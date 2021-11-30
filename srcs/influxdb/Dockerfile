@@ -1,6 +1,9 @@
-FROM alpine:latest
-RUN echo "INFLUXDB"
-RUN apk update && apk upgrade
+FROM alpine:3.14
+
+RUN echo ">> INFLUXDB <<"
+
+RUN apk update 
+RUN apk upgrade
 RUN apk add --no-cache influxdb
 RUN apkadd --no-cache telegraf
 

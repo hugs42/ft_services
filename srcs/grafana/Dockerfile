@@ -1,6 +1,7 @@
-FROM alpine:latest
+FROM alpine:3.14
 
 RUN echo ">> GRAFANA <<"
+
 RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache wget

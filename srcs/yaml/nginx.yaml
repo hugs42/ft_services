@@ -23,6 +23,9 @@ spec:
             name: http
           - containerPort: 443
             name: https
+          env:
+          - name: IP
+            value: 192.168.49.2
 ---
 
 apiVersion: v1
