@@ -29,18 +29,18 @@ kubectl apply -f - -n kube-system
 
 export EXTERNAL_IP=`minikube ip`
 
-envsubst '$EXTERNAL_IP' <  srcs/yaml/metallb_configmap.yaml
+envsubst '${EXTERNAL_IP}' < ./srcs/yaml/configmap/metallb_configmap.yaml > ./srcs/yalm/metallb_configmap.yalm
+envsubst '${EXTERNAL_IP}' < ./srcs/yaml/nginx.yaml > ./srcs/yalm/nginx.yaml
 
-envsubst '$EXTERNAL_IP' < ./srcs/yaml/mysql.yaml
-envsubst '$EXTERNAL_IP' < ./srcs/yaml/wordpress.yaml
-envsubst '$EXTERNAL_IP' < ./srcs/yaml/phpmyadmin.yaml
-envsubst '$EXTERNAL_IP' < ./srcs/yaml/nginx.yaml
+#envsubst ${$EXTERNAL_IP} < ./srcs/yaml/mysql.yaml
+#envsubst '$EXTERNAL_IP' < ./srcs/yaml/wordpress.yaml
+#envsubst '$EXTERNAL_IP' < ./srcs/yaml/phpmyadmin.yaml
 
-docker build -t nginx ./srcs/nginx/ #> /dev/null
-docker build -t mysql ./srcs/mysql/ #> /dev/null
-docker build -t phpmyadmin ./srcs/phpmyadmin/ #> /dev/null
-docker build -t wordpress ./srcs/wordpress/ #> /dev/null
-docker build -t ftps ./srcs/ftps/
+docker build -t nginx ./srcs/nginx/ --network=host #> /dev/null
+#docker build -t mysql ./srcs/mysql/ --network=host#> /dev/null
+#docker build -t phpmyadmin ./srcs/phpmyadmin/ --network=host #> /dev/null
+#docker build -t wordpress ./srcs/wordpress/ --network=host #> /dev/null
+#docker build -t ftps ./srcs/ftps/
 #docker build -t grafana ./srcs/grafana/
 #docker build -t influxdb ./srcs/influxdb/
 
@@ -51,10 +51,10 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 
 kubectl apply -f ./srcs/yalm/metallb_configmap.yalm
 kubectl apply -f ./srcs/yalm/nginx.yalm
-kubectl apply -f ./srcs/yalm/mysql.yalm
-kubectl apply -f ./srcs/yalm/phpmyadmin.yalm
-kubectl apply -f ./srcs/yalm/wordpress.yalm
-kubectl apply -f ./srcs/yalm/ftps.yalm
+#kubectl apply -f ./srcs/yalm/mysql.yalm
+#kubectl apply -f ./srcs/yalm/phpmyadmin.yalm
+#kubectl apply -f ./srcs/yalm/wordpress.yalm
+#kubectl apply -f ./srcs/yalm/ftps.yalm
 #kubectl apply -f ./srcs/yalm/grafana.yalm
 #kubectl apply -f ./srcs/yalm/influxdb.yalm
 
