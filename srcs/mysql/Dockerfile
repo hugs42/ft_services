@@ -2,10 +2,12 @@ FROM alpine:latest
 
 RUN echo ">> MYSQL <<"
 
-RUN apk update && apk upgrade
+RUN apk update
+RUN apk upgrade
 RUN apk add --no-cache mariadb
 RUN apk add --no-cache mariadb-common
 RUN apk add --no-cache mariadb-client
+RUN apk add --no-cache telegraf
 
 COPY ./srcs/run.sh ./
 

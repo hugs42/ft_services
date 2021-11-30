@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: Never
           ports:
           - containerPort: 8086
-            name: influxdb-8086
+            name: influxdb
 ---
 
 apiVersion: v1
@@ -35,6 +35,6 @@ spec:
     app: influxdb
   ports:
   - port: 8086
-    name: influxdb-8086
+    name: influxdb
     protocol: TCP
 

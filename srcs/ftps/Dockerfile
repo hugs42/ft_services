@@ -3,8 +3,9 @@ RUN echo ">>FTPS<<"
 
 RUN apk update
 RUN apk upgrade
-RUN apk add vsftpd
-RUN apk add openssl
+RUN apk add --no-cache vsftpd
+RUN apk add --no-cache openssl
+RUN apk add --no-cache telegraf
 
 RUN echo "root:toor" | chpasswd && mkdir /var/ftp
 

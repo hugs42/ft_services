@@ -7,6 +7,7 @@ RUN apk upgrade
 RUN apk add --no-cache wget
 RUN apk add --no-cache php7 php7-fpm php7-cli php7-mbstring php7-session php7-json
 RUN apk add --no-cache nginx
+RUN apk add --no-cache telegraf
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-all-languages.tar.gz > /dev/null
 
 RUN tar -xzvf phpMyAdmin-5.1.1-all-languages.tar.gz > /dev/null

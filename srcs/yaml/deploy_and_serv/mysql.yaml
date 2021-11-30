@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: Never
           ports:
           - containerPort: 3306
-            name: mysql-3306
+            name: mysql
 
 ---
 
@@ -36,6 +36,6 @@ spec:
     app: phpmyadmin
   ports:
   - port: 3306
-    name: mysql-3306
+    name: mysql
     protocol: TCP
 

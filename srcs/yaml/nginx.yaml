@@ -20,9 +20,9 @@ spec:
           imagePullPolicy: Never
           ports:
           - containerPort: 80
-            name: http-80
+            name: http
           - containerPort: 443
-            name: https-443
+            name: https
 ---
 
 apiVersion: v1
@@ -33,13 +33,13 @@ metadata:
     metallb.universe.tf/allow-shared-ip: shared
 spec:
   type: LoadBalancer
-  loadBalancerIP: {$EXTERNAL_IP}
+  loadBalancerIP: 192.168.49.2
   selector:
     app: nginx
   ports:
   - port: 80
-    name: http-80
+    name: http
     protocol: TCP
   - port: 443
-    name: https-443
+    name: https
     protocol: TCP
