@@ -1,20 +1,18 @@
 FROM alpine:3.14
-RUN echo ">>FTPS<<"
 
-RUN apk update
-RUN apk upgrade
+RUN echo ">> FTPS <<"
+
+#WORKDIR /tmp
+
 RUN apk add --no-cache vsftpd
-RUN apk add --no-cache openssl
-RUN apk add --no-cache telegraf --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/
+RUN apk add --no-cache openssl 
+RUN apk add --no-cache telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
 
-RUN echo "root:toor" | chpasswd && mkdir /var/ftp
 
-WORKDIR /etc/vsftpd/ssl
-RUN adduser -D -h /var/ftp root 
-RUN echo "root:toor" | chpasswd
-COPY ./srcs/vsftpd.conf /etc/vsftpd/vsftp.conf
-COPY ./srcs/run.sh ./
+COPY ./srcs/vsftpd.conf   /etc/vsftpd/vsftpd.conf
+COPY ./srcs/run.sh /
+RUN chmod +x /run.sh
 
-RUN chmod +x ./run.sh
-EXPOSE 21
-CMD sh run.sh
+EXPOSE 20 21 30021
+
+CMD sh /run.sh

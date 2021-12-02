@@ -1,5 +1,7 @@
 FROM alpine:3.14
 
+RUN echo ">> WORDPRESS <<"
+
 RUN apk update
 RUN apk upgrade
 RUN apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session
@@ -17,7 +19,7 @@ RUN mkdir -p /run/nginx
 
 COPY ./srcs/wordpress-5.8.2-fr_FR.tar.gz /
 
-RUN tar xvf wordpress-5.8.2-fr_FR.tar.gz > /dev/null
+RUN tar xvf wordpress-5.8.2-fr_FR.tar.gz
 RUN mv wordpress/* /www
 
 COPY ./srcs/nginx.conf /etc/nginx/nginx.conf
@@ -26,5 +28,7 @@ COPY ./srcs/telegraf.conf /etc/telegraf.conf
 
 COPY ./srcs/run.sh ./run.sh
 RUN chmod +x ./run.sh
-CMD sh ./run.sh
+
 EXPOSE 5050
+
+CMD sh ./run.sh

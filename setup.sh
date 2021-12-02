@@ -56,8 +56,8 @@ kubectl apply -f ./srcs/yaml/nginx.yaml
 kubectl apply -f ./srcs/yaml/mysql.yaml
 kubectl apply -f ./srcs/yaml/phpmyadmin.yaml
 kubectl apply -f ./srcs/yaml/wordpress.yaml
-kubectl apply -f ./srcs/yalm/ftps.yaml
-kubectl apply -f ./srcs/yalm/grafana.yaml
-kubectl apply -f ./srcs/yalm/influxdb.yaml
+kubectl apply -f ./srcs/yaml/ftps.yaml
+kubectl apply -f ./srcs/yaml/grafana.yaml
+kubectl apply -f ./srcs/yaml/influxdb.yaml
 
 minikube dashboard

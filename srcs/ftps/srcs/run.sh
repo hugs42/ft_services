@@ -1,9 +1,18 @@
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -subj "/C=FR/ST=75/L=Paris/O=42/CN=localhost"    \
-    -keyout /etc/nginx/ssl/nginx.key   \
-    -out /etc/nginx/ssl/nginx.crt
+    -subj "/C=FR/L=Paris/O=42/CN=localhost"    \
+    -keyout /etc/ssl/private/vsftpd.key   \
+    -out /etc/ssl/certs/vsftpd.crt
 
-telegraf -config /etc/telegraf.conf
+adduser -D $FTP_USER && echo "$FTP_USER:$FTP_PASSWD" | chpasswd
+chown -R $FTP_USER /home/$FTP_USER
+
+sed -i s/__IP__/$IP/g /etc/vsftpd/vsftpd.conf
+
+mkdir -p /etc/telegraf
+telegraf -sample-config --input-filter cpu:mem:net:swap:diskio --output-filter influxdb > /etc/telegraf/telegraf.conf
+sed -i s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = ["http:\/\/influxdb:8086"]'/ /etc/telegraf/telegraf.conf
+sed -i s/'# database = "telegraf"'/'database = "ftps"'/ /etc/telegraf/telegraf.conf
+sed -i s/'omit_hostname = false'/'omit_hostname = true'/ /etc/telegraf/telegraf.conf
+
 vsftpd /etc/vsftpd/vsftpd.conf
-
-sleep infinity
+telegraf
