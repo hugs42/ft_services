@@ -1,0 +1,73 @@
+apiVersion: 1
+datasources:
+  - name: nginx
+    type: influxdb
+    isDefault: false
+    access: proxy
+    database: nginx
+    user: root
+    password: toor
+    url: http://influxdb:8086/
+    jsonData:
+      httpMode: GET
+  - name: mysql
+    type: influxdb
+    isDefault: false
+    access: proxy
+    database: mysql
+    user: root
+    password: toor
+    url: http://influxdb:8086/
+    jsonData:
+      httpMode: GET
+  - name: phpmyadmin
+    type: influxdb
+    isDefault: false
+    access: proxy
+    database: phpmyadmin
+    user: root
+    password: toor
+    url: http://influxdb:8086/
+    jsonData:
+      httpMode: GET
+  - name: wordpress
+    type: influxdb
+    isDefault: false
+    access: proxy
+    database: wordpress
+    user: root
+    password: toor
+    url: http://influxdb:8086/
+    jsonData:
+      httpMode: GET
+  - name: ftps
+    type: influxdb
+    isDefault: true
+    access: proxy
+    database: ftps
+    user: root
+    password: toor
+    url: http://influxdb:8086/
+    jsonData:
+      httpMode: GET
+  - name: grafana
+    type: influxdb
+    isDefault: false
+    access: proxy
+    database: grafana
+    user: root
+    password: toor
+    url: http://influxdb:8086/
+    jsonData:
+      httpMode: GET
+  - name: influx
+    type: influxdb
+    isDefault: false
+    access: proxy
+    database: influx
+    user: root
+    password: toor
+    url: http://influxdb:8086/
+    jsonData:
+      httpMode: GET
+

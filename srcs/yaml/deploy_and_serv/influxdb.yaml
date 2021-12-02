@@ -5,15 +5,17 @@ metadata:
     app: influxdb
   name: influxdb
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: influxdb
-  replicas: 1
+  strategy: Recreate
   template:
     metadata:
       labels:
         app: influxdb
     spec:
+      RestartPolicy: Always
       containers:
         - name: influxdb
           image: influxdb
@@ -21,6 +23,29 @@ spec:
           ports:
           - containerPort: 8086
             name: influxdb
+            volumeMounts:
+        - name: influxdb-persistent-storage
+          mountPath: /var/lib/influxdb
+      volumes:
+      - name: influxdb-persistent-storage
+        persistentVolumeClaim:
+          claimName: influxdb-pv-claim
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influxdb-pv-claim
+  labels:
+    app: influxdb
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
 ---
 
 apiVersion: v1
@@ -37,4 +62,4 @@ spec:
   - port: 8086
     name: influxdb
     protocol: TCP
-
+    targetPort: 8086

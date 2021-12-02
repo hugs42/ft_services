@@ -38,3 +38,4 @@ spec:
   - port: 21
     name: ftps
     protocol: TCP
+    targetPort: 21

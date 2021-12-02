@@ -1,0 +1,16 @@
+server {
+		listen 0.0.0.0:5000 ssl default_server;
+		server_name localhost;
+		ssl_certificate		/etc/nginx/ssl/nginx.crt;
+		ssl_certificate_key	/etc/nginx/ssl/nginx.key;
+		root /var/www/html/;
+		autoindex on;
+		index index.php;
+
+		location ~ \.php$ {
+			include fastcgi.conf;
+			fastcgi_pass 127.0.0.1:9000;
+			include fastcgi_params;
+			fastcgi_index index.php;
+		}
+}

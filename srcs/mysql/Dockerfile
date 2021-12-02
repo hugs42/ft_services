@@ -1,17 +1,15 @@
 FROM alpine:3.14
 
-RUN echo ">> MYSQL <<"
-
 RUN apk update
 RUN apk upgrade
-RUN apk add --no-cache mariadb
-RUN apk add --no-cache mariadb-common
-RUN apk add --no-cache mariadb-client
-RUN apk add --no-cache telegraf
+RUN apk add mysql
+RUN apk add mysql-client
+RUN apk add telegraf 
 
-COPY ./srcs/run.sh ./
+COPY ./srcs/run.sh /run.sh
+COPY ./srcs/init.sql /init.sql
+COPY ./srcs/my.cnf /etc/my.cnf
+RUN chmod +x /run.sh
+COPY ./srcs/telegraf.conf /etc/telegraf.conf
 
-EXPOSE 3306
-
-CMD /etc/init.d/mariadb setup
-CMD sh run.sh
+CMD sh /run.sh

@@ -5,22 +5,19 @@ metadata:
     app: wordpress
   name: wordpress
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: wordpress
-  replicas: 1
   template:
     metadata:
       labels:
         app: wordpress
     spec:
       containers:
-        - name: wordpress
-          image: wordpress
-          imagePullPolicy: Never
-          ports:
-          - containerPort: 5050
-            name: wordpress
+      - name: wordpress
+        image: wordpress
+        imagePullPolicy: Never
 
 ---
 
@@ -30,13 +27,15 @@ metadata:
   name: wordpress
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
+  labels:
+    app: wordpress
 spec:
   type: LoadBalancer
   loadBalancerIP: ${EXTERNAL_IP}
   selector:
     app: wordpress
   ports:
-  - port: 5050
-    name: wordpress
-    protocol: TCP
+  - name: wordpress-port
+    port: 5050
+    targetPort: 5050
 

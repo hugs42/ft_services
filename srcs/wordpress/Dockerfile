@@ -1,27 +1,30 @@
 FROM alpine:3.14
 
-RUN echo ">>WORDPRESS<<"
-
 RUN apk update
 RUN apk upgrade
+RUN apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-zlib php7-curl php7-mbstring php7-json php7-session
 RUN apk add wget
 RUN apk add nginx
-RUN apk add mariadb mariadb-client
-RUN apk add php7 php7-fpm php7-cli php7-mbstring php7-session php7-json
-RUN apk add telegraf
+RUN apk add telegraf 
 
-RUN wget https://wordpress.org/latest.tar.gz > /dev/null
-RUN tar -xzvf latest.tar.gz > /dev/null
-RUN mkdir -p /var/www/html
-RUN mv wordpress /var/www/html
-RUN rm -f latest.tar.gz
+RUN adduser -D -g 'www' www
 
-COPY ./srcs/wp-config.php /var/www/html/wordpress
-COPY ./srcs/default.conf /etc/nginx/conf.d/default.conf
+RUN mkdir /www
+RUN mkdir /www/wp
+RUN chown -R www:www /var/lib/nginx
+RUN chown -R www:www /www
+RUN mkdir -p /run/nginx
 
+COPY ./srcs/wordpress-5.8.2-fr_FR.tar.gz /
+
+RUN tar xvf wordpress-5.8.2-fr_FR.tar.gz > /dev/null
+RUN mv wordpress/* /www
+
+COPY ./srcs/nginx.conf /etc/nginx/nginx.conf
+COPY ./srcs/config.php /www/wp-config.php
+COPY ./srcs/telegraf.conf /etc/telegraf.conf
+
+COPY ./srcs/run.sh ./run.sh
+RUN chmod +x ./run.sh
+CMD sh ./run.sh
 EXPOSE 5050
-
-COPY ./srcs/run.sh ./
-RUN chmod +x run.sh
-CMD /etc/init.d/mariadb setup
-CMD sh run.sh
