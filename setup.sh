@@ -15,7 +15,7 @@ minikube stop
 minikube delete
 minikube start --driver=docker --cpus=3
 
-eval $(minikube docker-env)
+
 
 minikube addons enable metrics-server
 minikube addons enable dashboard
@@ -38,6 +38,7 @@ envsubst '$EXTERNAL_IP' < ./srcs/yaml/deploy_and_serv/ftps.yaml > ./srcs/yaml/ft
 envsubst '$EXTERNAL_IP' < ./srcs/yaml/deploy_and_serv/grafana.yaml > ./srcs/yaml/grafana.yaml
 envsubst '$EXTERNAL_IP' < ./srcs/yaml/deploy_and_serv/influxdb.yaml > ./srcs/yaml/influxdb.yaml
 
+eval $(minikube docker-env)
 docker build -t nginx ./srcs/nginx/ --network=host
 docker build -t mysql ./srcs/mysql/ --network=host
 docker build -t phpmyadmin ./srcs/phpmyadmin/ --network=host
