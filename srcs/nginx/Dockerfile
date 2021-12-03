@@ -20,9 +20,11 @@ COPY ./srcs/index.html /var/www/html/index.html
 
 WORKDIR /
 COPY ./srcs/run.sh /
+RUN chmod +x /run.sh
 
-EXPOSE 80 443
 
 RUN mkdir -p /run/nginx
+
+EXPOSE 80 443
 #CMD service telegraf start
-CMD sh run.sh
+CMD sh /run.sh
