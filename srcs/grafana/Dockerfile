@@ -4,6 +4,7 @@ RUN echo ">> GRAFANA <<"
 
 RUN apk add --no-cache grafana 
 RUN apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+RUN apk add nano
 
 COPY ./srcs/grafana.db /usr/share/grafana/data/grafana.db
 COPY ./srcs/run.sh /

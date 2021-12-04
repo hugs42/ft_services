@@ -3,8 +3,8 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/ssl/private/vsftpd.key   \
     -out /etc/ssl/certs/vsftpd.crt
 
-adduser -D $FTP_USER && echo "$FTP_USER:$FTP_PASSWD" | chpasswd
-chown -R $FTP_USER /home/$FTP_USER
+adduser -D admin && echo "admin:admin" | chpasswd
+chown -R admin /home/admin
 
 sed -i s/__IP__/$IP/g /etc/vsftpd/vsftpd.conf
 

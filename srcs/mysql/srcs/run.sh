@@ -6,5 +6,4 @@ sed -i s/'# database = "telegraf"'/'database = "mysql"'/ /etc/telegraf/telegraf.
 sed -i s/'omit_hostname = false'/'omit_hostname = true'/ /etc/telegraf/telegraf.conf
 
 mysql_install_db --user=mysql --basedir=/usr --ldata=/data
-#telegraf -config /etc/telegraf.conf &
 mysqld_safe --user=mysql --console --init_file=/init.sql
